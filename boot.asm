@@ -1,22 +1,17 @@
-message:
-  db "Hello World"
-push message
-call print_string
+mov ah, 0x0e
+
+mov bp, 0x8000
+mov sp, bp
+
+push 'A'
+push 'B'
+push 'C'
+
+pop bx
+mov al, bl
+int 0x10
 
 jmp $
 
-print_string:
-  mov ah, 0x0e
-  pop bx
-  cmp bx, 0x00
-  jne print_character
-  ret
-
-print_character:
-  mov bl, al
-  int 0x10
-  jmp print_string
-
 times 510-($-$$) db 0
-
 dw 0xaa55
