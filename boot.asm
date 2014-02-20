@@ -1,37 +1,31 @@
 [org 0x7c00]
 
-mov si, HELLO_MSG
+  mov si, HELLO_MSG
+  call print_r
 
-call print_string
+  mov bp, 0x9000
+  mov sp, bp
+  call switch_to_pm
+  
+  jmp $
 
-mov si, LAUNCH_MSG
-
-exit:
-; Switch to 32-bit protected mode.
-lgdt [gdt_descriptor]
-mov eas, cr0
-or eax, 0x1
-mov cr0, eax
-; Now we're in protected mode.
-
-; Clearing the pipeline
-jmp CODE_SEG:protected_mode_entry
-
-
-%include "print_string.asm"
+%include "print_r.asm"
+%include "print_p.asm"
 %include "boot/gdt.asm"
-; Data
-HELLO_MSG:
-  db 'Bootstrapping... \n', 0
+%include "boot/protected_mode.asm"
 
-LAUNCH_MSG:
-  db 'Loading second stage. \n', 0
+[bits 32]
 
+PM_ENTRY:
+  mov ebx, PROTECTED_MODE_MSG
+  call print_p
+  jmp $
+
+PROTECTED_MODE_MSG db "Loaded protected mode.", 0
+HELLO_MSG db "Booting Protected mode...", 0
+
+; Bootsector padding
 times 510-($-$$) db 0
 dw 0xaa55
 
 
-[bits 32]
-
-protected_mode_entry:
-jmp $
