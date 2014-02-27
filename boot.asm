@@ -9,8 +9,8 @@
   
   jmp $
 
-%include "print_r.asm"
-%include "print_p.asm"
+%include "print/print_r.asm"
+%include "print/print_p.asm"
 %include "boot/gdt.asm"
 %include "boot/protected_mode.asm"
 
