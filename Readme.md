@@ -15,3 +15,20 @@ floppya: 1_44=~/Development/toy-os/boot.bin, status=inserted
 boot: a
 ```
 
+Useful commands:
+----------------
+
+Compiles basic.c to basic.o in freestanding mode:
+```gcc -ffreestanding -c basic.c -o basic.o```
+
+Dump an object file:
+```objdump -d basic.o```
+
+Links to binary file for execution:
+```ld -o basic.bin -Ttext 0x0 --oformat binary basic.o```
+
+
+Dissassemble Binary:
+```nadisasm -b 32 basic.bin > basic.dis```
+
+
