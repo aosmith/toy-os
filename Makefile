@@ -6,7 +6,7 @@ HEADERS = $(wildcard kernel/*.h)
 OBJ = ${C_SOURCES:.c=.o}
 
 run: all
-	bochs
+	bochs && make
 
 all: image
 
@@ -16,7 +16,7 @@ image: boot/boot.bin kernel.bin
 	cat $^ > toy-os.img
 
 clean:
-	rm *.bin *.o toy-os.img kernel/*.o boot/*.bin drivers/*.o
+	rm *.bin *.o toy-os.img kernel/*.o boot/*.bin
 
 # Link
 kernel.bin: boot/kernel_entry.o ${OBJ}
