@@ -15,8 +15,21 @@ floppya: 1_44=~/Development/toy-os/boot.bin, status=inserted
 boot: a
 ```
 
+Right now this boots to protected mode and runs main from `kernel.c`.  This just prints an X at the top right corner.
+
 Useful commands:
 ----------------
+Build:
+```make all```
+
+Run:
+```make run```
+
+Clean:
+```make clean```
+
+BarrelRoll:
+```make reset``
 
 Compiles basic.c to basic.o in freestanding mode:
 ```gcc -ffreestanding -c basic.c -o basic.o```

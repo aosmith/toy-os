@@ -5,6 +5,8 @@ run: all
 
 all: combine
 
+BarrelRoll: clean run
+
 combine: boot.bin kernel.bin
 	cat boot.bin kernel.bin > toy-os.img
 
