@@ -23,8 +23,8 @@ kernel.o: kernel.c
 
 # Kernel Entry ensures proper linking of the boot sector and kernel
 kernel_entry.o: kernel_entry.asm
-	nasm $< -f elf -o kernel_entry.o
+	nasm $^ -f elf -o kernel_entry.o
 
 # Compile boot sector
 boot.bin: boot.asm
-	nasm $< -f bin -o $@
+	nasm $^ -f bin -o $@
