@@ -3,28 +3,28 @@
 run: all
 	bochs
 
-all: combine
+all: image
 
 BarrelRoll: clean run
 
-combine: boot.bin kernel.bin
+image: boot.bin kernel.bin
 	cat boot.bin kernel.bin > toy-os.img
 
 clean:
-	rm *.bin *.o
+	rm *.bin *.o toy-os.img
 
 # Link
 kernel.bin: kernel_entry.o kernel.o
 	ld -m elf_i386 -o kernel.bin -Ttext 0x1000 $^ --oformat binary
 
 # Compile Kernel
-kernel.o: kernel.c
+kernel.o: kernel/kernel.c
 	gcc -m32 -ffreestanding -c $< -o $@
 
 # Kernel Entry ensures proper linking of the boot sector and kernel
-kernel_entry.o: kernel_entry.asm
+kernel_entry.o: boot/kernel_entry.asm
 	nasm $^ -f elf -o kernel_entry.o
 
 # Compile boot sector
-boot.bin: boot.asm
+boot.bin: boot/boot.asm
 	nasm $^ -f bin -o $@
