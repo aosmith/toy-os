@@ -1,5 +1,10 @@
 # Default make target .
 
+C_SOURCES = $(wildcard kernel/*.c)
+HEADERS = $(wildcard kernel/*.h)
+
+OBJ = ${C_SOURCES:.c=.o}
+
 run: all
 	bochs
 
@@ -7,24 +12,23 @@ all: image
 
 BarrelRoll: clean run
 
-image: boot.bin kernel.bin
-	cat boot.bin kernel.bin > toy-os.img
+image: boot/boot.bin kernel.bin
+	cat $^ > toy-os.img
 
 clean:
-	rm *.bin *.o toy-os.img
+	rm *.bin *.o toy-os.img kernel/*.o boot/*.bin drivers/*.o
 
 # Link
-kernel.bin: kernel_entry.o kernel.o
-	ld -m elf_i386 -o kernel.bin -Ttext 0x1000 $^ --oformat binary
+kernel.bin: boot/kernel_entry.o ${OBJ}
+	ld -m elf_i386 -o $@ -Ttext 0x1000 $^ --oformat binary
 
-# Compile Kernel
-kernel.o: kernel/kernel.c
+# Compile .c sources into object files
+%.o: %.c
 	gcc -m32 -ffreestanding -c $< -o $@
 
-# Kernel Entry ensures proper linking of the boot sector and kernel
-kernel_entry.o: boot/kernel_entry.asm
-	nasm $^ -f elf -o kernel_entry.o
+# Compile .asm sources into object files
+%.o: %.asm
+	nasm $< -f elf -o $@
 
-# Compile boot sector
-boot.bin: boot/boot.asm
-	nasm $^ -f bin -o $@
+%.bin: %.asm
+	nasm $< -f bin -o $@
