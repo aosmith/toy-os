@@ -13,20 +13,18 @@ combine: boot.bin kernel.bin
 clean:
 	rm *.bin *.o
 
-# # $ ^ is substituted with all of the target ’ s dependancy files
+# Link
 kernel.bin: kernel_entry.o kernel.o
 	ld -m elf_i386 -o kernel.bin -Ttext 0x1000 $^ --oformat binary
 
-# # $ < is the first dependancy and $@ is the target file
+# Compile Kernel
 kernel.o: kernel.c
 	gcc -m32 -ffreestanding -c $< -o $@
 
+# Kernel Entry ensures proper linking of the boot sector and kernel
 kernel_entry.o: kernel_entry.asm
 	nasm $< -f elf -o kernel_entry.o
 
+# Compile boot sector
 boot.bin: boot.asm
 	nasm $< -f bin -o $@
-
-# # Same as the above rule .
-# kernel_entry.o: kernel_entry.asm
-# 	nasm $ < -f elf -o $@
