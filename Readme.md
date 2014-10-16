@@ -65,4 +65,4 @@ This is simply the best way to learn about a computer on a very low level.  Gett
 
 
 
-Based on "Writing a Simple Operating System --- from Scratch" by Nick Blundell.
+Based on "Writing a Simple Operating System -- from Scratch" by Nick Blundell.
