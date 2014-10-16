@@ -19,7 +19,7 @@ clean:
 	rm -f *.bin *.o toy-os.img kernel/*.o boot/*.bin
 
 # Link
-kernel.bin: boot/kernel_entry.o ${OBJ}
+kernel.bin: boot/kernel_entry.o ${OBJ} drivers/screen.o
 	ld -m elf_i386 -o $@ -Ttext 0x1000 $^ --oformat binary
 
 # Compile .c sources into object files
