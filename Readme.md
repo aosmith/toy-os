@@ -37,24 +37,24 @@ Right now this boots to protected mode and runs main from `kernel.c`.  This just
 Useful commands:
 ----------------
 Build:
-```make all```
+`make all`
 
 Run:
-```make run```
+`make run`
 
 Clean:
-```make clean```
+`make clean`
 
-BarrelRoll:
-```make reset``
+Reset:
+`make reset`
 
 Dump an object file:
-```objdump -d basic.o```
+`objdump -d basic.o`
 
 Dissassemble Binary:
-```nadisasm -b 32 basic.bin > basic.dis```
+`nadisasm -b 32 basic.bin > basic.dis`
 
-Compatability:
+Compatibility:
 --------------
 Right now this should work on most linux systems (assuming you have nasm, gcc, ld, bochs, etc.).
 
