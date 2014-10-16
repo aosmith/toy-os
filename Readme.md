@@ -32,7 +32,7 @@ You can build and run this project with `make start`.
 
 I've been running this using bochs, so it includes a bochsrc.txt.
 
-Right now this boots to protected mode and runs main from `kernel.c`.  This just prints an X at the top right corner.
+Right now this boots to protected mode and runs main from `kernel.c`.  This just prints an X at the top left corner.
 
 Useful commands:
 ----------------
