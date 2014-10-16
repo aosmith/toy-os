@@ -26,10 +26,6 @@ toy-os
 ======
 This is a toy operating system.  Right now it sets up the gdt and switches from real to protected mode.
 
-Building:
----------
-```nasm -f bin -o boot.bin```
-
 Running:
 --------
 You can build and run this project with `make start`.
@@ -52,15 +48,8 @@ Clean:
 BarrelRoll:
 ```make reset``
 
-Compiles basic.c to basic.o in freestanding mode:
-```gcc -ffreestanding -c basic.c -o basic.o```
-
 Dump an object file:
 ```objdump -d basic.o```
-
-Links to binary file for execution:
-```ld -o basic.bin -Ttext 0x0 --oformat binary basic.o```
-
 
 Dissassemble Binary:
 ```nadisasm -b 32 basic.bin > basic.dis```
