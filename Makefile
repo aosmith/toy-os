@@ -16,7 +16,7 @@ image: boot/boot.bin kernel.bin
 	cat $^ > toy-os.bin
 
 clean:
-	rm *.bin *.o toy-os.img kernel/*.o boot/*.bin
+	rm -f *.bin *.o toy-os.img kernel/*.o boot/*.bin
 
 # Link
 kernel.bin: boot/kernel_entry.o ${OBJ}

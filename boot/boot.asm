@@ -1,22 +1,5 @@
 [org 0x7c00]
 
-; Static vars
-KERNEL_OFFSET equ 0x1000
-STACK_OFFSET equ 0x9000
-SECTORS_TO_LOAD equ 15
-HELLO_MSG db "Booting Protected mode...", 0
-KERNEL_MSG db "Loading Kernel...", 0
-DISK_LOAD_MSG db "Disk loaded...", 0
-BOOT_DRIVE db 0
-
-; Includes
-%include "boot/print_r.asm"
-%include "boot/print_p.asm"
-%include "boot/gdt.asm"
-%include "boot/protected_mode.asm"
-%include "boot/disk_load.asm"
-
-
 ; Save boot drive
 mov [BOOT_DRIVE], dl
 
@@ -34,6 +17,21 @@ call switch_to_pm
 
 jmp $
 
+; Static vars
+KERNEL_OFFSET equ 0x1000
+STACK_OFFSET equ 0x9000
+SECTORS_TO_LOAD equ 15
+HELLO_MSG db "Booting Protected mode...", 0
+KERNEL_MSG db "Loading Kernel...", 0
+DISK_LOAD_MSG db "Disk loaded...", 0
+BOOT_DRIVE db 0
+
+; Includes
+%include "boot/print_r.asm"
+%include "boot/print_p.asm"
+%include "boot/gdt.asm"
+%include "boot/protected_mode.asm"
+%include "boot/disk_load.asm"
 
 [bits 16]
 
