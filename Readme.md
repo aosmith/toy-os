@@ -32,12 +32,9 @@ Building:
 
 Running:
 --------
-I've been using bochs to run my binaries (as a floppy drive). Your boschsrc should look something like this:
+You can build and run this project with `make start`.
 
-```
-floppya: 1_44=~/Development/toy-os/boot.bin, status=inserted
-boot: a
-```
+I've been running this using bochs, so it includes a bochsrc.txt.
 
 Right now this boots to protected mode and runs main from `kernel.c`.  This just prints an X at the top right corner.
 
