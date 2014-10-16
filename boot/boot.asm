@@ -1,11 +1,17 @@
 [org 0x7c00]
+; Static vars
 KERNEL_OFFSET equ 0x1000
-  
-  mov [BOOT_DRIVE], dl
-  mov bp, 0x9000
-  mov sp, bp
-  mov si, HELLO_MSG
-  call print_r
+STACK_OFFSET equ 0x9000
+HELLO_MSG db "Booting Protected mode...", 0
+KERNEL_MSG db "Loading Kernel...", 0
+DISK_LOAD_MSG db "Disk loaded...", 0
+BOOT_DRIVE db 0
+ 
+mov [BOOT_DRIVE], dl
+mov bp, STACK_OFFSET
+mov sp, bp
+mov si, HELLO_MSG
+call print_r
 
   call load_kernel
   call switch_to_pm
@@ -37,20 +43,10 @@ load_kernel:
 
 [bits 32]
 
-PM_ENTRY:
-  mov ebx, PROTECTED_MODE_MSG
-  call print_p
-  
+PM_ENTRY:  
   call KERNEL_OFFSET
 
   jmp $
-
-PROTECTED_MODE_MSG db "Loaded protected mode.", 0
-HELLO_MSG db "Booting Protected mode...", 0
-KERNEL_MSG db "Loading Kernel...", 0
-DISK_LOAD_MSG db "Disk loaded...", 0
-BOOT_DRIVE db 0
-
 
 ; Bootsector padding
 times 510-($-$$) db 0

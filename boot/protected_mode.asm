@@ -19,4 +19,11 @@ init_pm:
   mov gs, ax
   mov ebp, 0x9000
   mov esp, ebp
+  
+  ; Print a single dot
+  mov ebx, "."
+  call print_p
+
   call PM_ENTRY
+
+  jmp $

@@ -10,10 +10,10 @@ run: all
 
 all: image
 
-BarrelRoll: clean run
+reset: clean run
 
 image: boot/boot.bin kernel.bin
-	cat $^ > toy-os.img
+	cat $^ > toy-os.bin
 
 clean:
 	rm *.bin *.o toy-os.img kernel/*.o boot/*.bin
